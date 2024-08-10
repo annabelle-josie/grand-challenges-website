@@ -1,38 +1,125 @@
-.App {
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.sidebar {
+  position: fixed;
+  width: 200px;
+  height: 100%;
+  background-color: #000;
+  padding-top: 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.sidebar .logo {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.sidebar .tablink {
+  display: block;
+  background-color: #000;
+  color: white;
+  padding: 16px;
+  text-align: left;
+  border: none;
+  outline: none;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.sidebar .tablink:hover {
+  background-color: #575757;
+}
+
+.sidebar .tablink.active {
+  background-color: white;
+  color: black;
+}
+
+.main-content {
+  margin-left: 200px;
+  padding: 20px;
+}
+
+.tabcontent {
+  display: none;
+}
+
+.next-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.rounded-box {
+  background-color: #000;
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.rounded-box p {
+  margin: 0 0 10px;
+}
+
+.rounded-box form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.rounded-box input[type="email"],
+.rounded-box input[type="radio"] {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.rounded-box button {
+  padding: 10px;
+  background-color: #575757;
   color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.rounded-box button:hover {
+  background-color: #777;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.rounded-box label {
+  margin-bottom: 10px;
+}
+
+#types-result,
+#uses-result,
+#pattern-result,
+#dangers-result,
+#action-result {
+  font-weight: bold;
+}
+
+#status-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f3f3f3;
+  height: 20px;
+  z-index: 1;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0;
+  background-color: #4caf50;
+  text-align: center;
+  line-height: 20px;
+  color: white;
 }
