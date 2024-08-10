@@ -1,7 +1,8 @@
+import React from 'react';
 import { useState } from "react";
 import { tabs } from "./content.js";
 import logo from "./logo.jpeg";
-import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
+// import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 
 function PageContent({ pageId }) {
   function loadPage() {
@@ -30,7 +31,7 @@ export default function UKAI() {
     console.log(complete);
     var totalComplete = 0;
     for (let i = 0; i < complete.length; i++) {
-      if (complete[i] == true) {
+      if (complete[i] === true) {
         totalComplete++;
       }
     }
@@ -52,39 +53,39 @@ export default function UKAI() {
   function Sidebar() {
     return (
       <div className="sidebar">
-        <img src={logo} className="logo" />
+        <img src={logo} alt="UKAI Logo: Defend, Secure, Empower" className="logo" />
         <button
-          className={"tablink" + (page == 0 ? " active" : "")}
+          className={"tablink" + (page === 0 ? " active" : "")}
           onClick={() => pageSwap(0)}
         >
           Overview
         </button>
         <button
-          className={"tablink" + (page == 1 ? " active" : "")}
+          className={"tablink" + (page === 1 ? " active" : "")}
           onClick={() => pageSwap(1)}
         >
           Types of AI
         </button>
         <button
-          className={"tablink" + (page == 2 ? " active" : "")}
+          className={"tablink" + (page === 2 ? " active" : "")}
           onClick={() => pageSwap(2)}
         >
           Uses of AI
         </button>
         <button
-          className={"tablink" + (page == 3 ? " active" : "")}
+          className={"tablink" + (page === 3 ? " active" : "")}
           onClick={() => pageSwap(3)}
         >
           Pattern Prediction
         </button>
         <button
-          className={"tablink" + (page == 4 ? " active" : "")}
+          className={"tablink" + (page === 4 ? " active" : "")}
           onClick={() => pageSwap(4)}
         >
           Dangers of AI
         </button>
         <button
-          className={"tablink" + (page == 5 ? " active" : "")}
+          className={"tablink" + (page === 5 ? " active" : "")}
           onClick={() => pageSwap(5)}
         >
           What You Can Do
@@ -114,7 +115,7 @@ export default function UKAI() {
       const formJson = Object.fromEntries(formData.entries());
 
       const answer = tabs[pageId].quiz[0].answer;
-      if (formJson.types == answer) {
+      if (formJson.types === answer) {
         //console.log("correct option chosen");
         setSuccessMessage("Correct!");
         compeleteCalc();
@@ -128,14 +129,12 @@ export default function UKAI() {
       //checkProgress();
     }
 
-    function durationFinder() {}
-
     function Success() {
-      if (successMessage == "Correct!") {
+      if (successMessage === "Correct!") {
         return (
           <div>
             <p id="types-result">{successMessage}</p>
-            <Fireworks autorun={{ speed: 3, duration: 5 }} />
+            {/* <Fireworks autorun={{ speed: 3, duration: 5 }} /> */}
           </div>
         );
       } else {
@@ -179,7 +178,7 @@ export default function UKAI() {
   function allComplete() {
     var allDone = true;
     for (let i = 0; i < complete.length; i++) {
-      if (complete[i] == false) {
+      if (complete[i] === false) {
         allDone = false;
       }
     }
@@ -239,8 +238,7 @@ export default function UKAI() {
     }
   }
 
-  var booleanTest = true;
-  const [isVisible, setIsVisible] = useState(false);
+  // const [isVisible, setIsVisible] = useState(false);
   return (
     <>
       <Sidebar />
