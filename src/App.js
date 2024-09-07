@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from "react";
 import { tabs } from "./content.js";
 import logo from "./logo.jpeg";
-// import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
+import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 
 function PageContent({ pageId }) {
   function loadPage() {
@@ -15,8 +15,8 @@ function PageContent({ pageId }) {
 }
 
 export default function UKAI() {
-  const [page, setPage] = useState(0);
-  const [successMessage, setSuccessMessage] = useState("");
+  const [page, setPage] = useState(0); //Current page to display (very important and needed)
+  const [successMessage, setSuccessMessage] = useState(""); //Words to display once clicked on quiz (Correct/Incorrect)
   const [complete, setComplete] = useState([
     false,
     false,
@@ -24,11 +24,11 @@ export default function UKAI() {
     false,
     false,
     false,
-  ]);
-  const [progress, setProgress] = useState(0);
-
+  ]); //For the different pages whether correct
+  const [progress, setProgress] = useState(0); //how many of Complete are true
+ 
+  //Updates progress
   function checkProgress() {
-    console.log(complete);
     var totalComplete = 0;
     for (let i = 0; i < complete.length; i++) {
       if (complete[i] === true) {
@@ -40,14 +40,7 @@ export default function UKAI() {
 
   function pageSwap(pageName) {
     setSuccessMessage("");
-    checkProgress();
     setPage(pageName);
-  }
-
-  function nextButton() {
-    setSuccessMessage("");
-    checkProgress();
-    setPage((page + 1) % 6);
   }
 
   function Sidebar() {
@@ -97,14 +90,14 @@ export default function UKAI() {
   function QuizPart({ pageId }) {
     function compeleteCalc() {
       //TODO: I think there is something wrong here?
-      //It loads the first page straight away,
-      //the others need submit twice
+      //quiz needs to change page to reload
       const newValue = [false, false, false, false, false, false];
       for (let i = 0; i < complete.length; i++) {
         newValue[i] = complete[i];
       }
       newValue[pageId] = true;
       setComplete(newValue);
+      // setProgress(progress + 1);
     }
 
     function handleSubmit(e) {
@@ -116,17 +109,11 @@ export default function UKAI() {
 
       const answer = tabs[pageId].quiz[0].answer;
       if (formJson.types === answer) {
-        //console.log("correct option chosen");
         setSuccessMessage("Correct!");
         compeleteCalc();
-        checkProgress();
-        //console.log(complete);
-        //add confetti component here
       } else {
         setSuccessMessage("Incorrect, try again!");
-        //console.log("nope, wrong one");
       }
-      //checkProgress();
     }
 
     function Success() {
@@ -134,17 +121,15 @@ export default function UKAI() {
         return (
           <div>
             <p id="types-result">{successMessage}</p>
-            {/* <Fireworks autorun={{ speed: 3, duration: 5 }} /> */}
+            { <Fireworks autorun={{ speed: 3, duration: 5 }} /> }
           </div>
         );
       } else {
-        //setComplete(false);
         return <p id="types-result">{successMessage}</p>;
       }
     }
 
     function loadQuiz() {
-      //tabs[pageId].htmlCode
       return (
         <div className="rounded-box">
           <p>{tabs[pageId].quiz[0].question}</p>
@@ -230,7 +215,7 @@ export default function UKAI() {
           <div className="quiz">
             <QuizPart pageId={page} />
           </div>
-          <button className="next-button" onClick={nextButton}>
+          <button className="next-button" onClick={() => pageSwap((page + 1) % 6)}>
             Next
           </button>
         </div>
@@ -238,17 +223,23 @@ export default function UKAI() {
     }
   }
 
-  // const [isVisible, setIsVisible] = useState(false);
-  return (
-    <>
-      <Sidebar />
-      <MainContent />
-
+  function ProgressBar(){
+    checkProgress();
+    return(
       <div id="status-bar">
         <div id="progress-bar" style={{ width: progress + "%" }}>
           {Math.round((progress / 100) * 6) + "/6"}
         </div>
       </div>
+    );
+
+  }
+
+  return (
+    <>
+      <Sidebar />
+      <MainContent />
+      <ProgressBar />
     </>
   );
 }
