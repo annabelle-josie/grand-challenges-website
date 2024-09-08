@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from "react";
+import { React, useState } from 'react';
 import { tabs } from "./content.js";
 import logo from "./logo.jpeg";
 import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
@@ -29,9 +28,9 @@ export default function UKAI() {
  
   //Updates progress
   function checkProgress() {
-    var totalComplete = 0;
-    for (let i = 0; i < complete.length; i++) {
-      if (complete[i] === true) {
+    let totalComplete = 0;
+    for (const element of complete) {
+      if (element === true) {
         totalComplete++;
       }
     }
@@ -89,15 +88,12 @@ export default function UKAI() {
 
   function QuizPart({ pageId }) {
     function compeleteCalc() {
-      //TODO: I think there is something wrong here?
-      //quiz needs to change page to reload
       const newValue = [false, false, false, false, false, false];
       for (let i = 0; i < complete.length; i++) {
         newValue[i] = complete[i];
       }
       newValue[pageId] = true;
       setComplete(newValue);
-      // setProgress(progress + 1);
     }
 
     function handleSubmit(e) {
@@ -156,14 +152,13 @@ export default function UKAI() {
       );
     }
 
-    //var pageDetials = loadQuiz();
     return loadQuiz();
   }
 
   function allComplete() {
-    var allDone = true;
-    for (let i = 0; i < complete.length; i++) {
-      if (complete[i] === false) {
+    let allDone = true;
+    for (const element of complete) {
+      if (element === false) {
         allDone = false;
       }
     }

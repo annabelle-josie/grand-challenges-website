@@ -1,6 +1,6 @@
 # Grand Challenges Website - UKAI educational resource
 
-Prototype website created in the week of Grand Challenges at the University of Exeter. This was to show how the website would work as part of a presentation of our idea in front of the other people who had taken part in the week. 
+Prototype website created in the week of Grand Challenges at the University of Exeter. This was to show how the website would work as part of a presentation of our idea in front of the other people who had taken part in the week.
 
 Our group's proposal was to create a resource aimed at educating non-tech people on what AI is, how it actually works (in easy to understand language) and how it affects them. Our team of 5 worked to create a Ministerial Submission in the style that would be given the UK government talking about this idea. We had around 3 days to actually come up with an idea and turn it into something ready to present - with other time spent attending talks from a range of speakers.
 
